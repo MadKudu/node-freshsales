@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.env
+yarn.lock
+dist/
+.DS_Store
+.nyc_output/
+coverage/
