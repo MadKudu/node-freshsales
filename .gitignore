@@ -2,10 +2,7 @@ node_modules
 npm-debug.log
 .env
 yarn.lock
-<<<<<<< 8286300fff3f90418c1c37175cc513c0f5415f9f
 dist/
 .DS_Store
 .nyc_output/
 coverage/
-=======
->>>>>>> Initial commit
