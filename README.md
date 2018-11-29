@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales/badges/gpa.svg)](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales)
 [![Test Coverage](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales/badges/coverage.svg)](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales/coverage)
 
-Javascript / node.js wrapper for the [FreshSales API](https://www.freshsales.io/api/)
+Javascript / node.js wrapper for the [Freshsales API](https://www.freshsales.io/api/)
 
 ## Installing
 
@@ -14,15 +14,15 @@ npm install freshsales
 ## Instantiate client
 
 ```javascript
-const FreshSales = require('freshsales');
-const freshsales = new FreshSales({ apiKey: 'key', domain: 'domain' });
+const Freshsales = require('freshsales');
+const freshsales = new Freshsales({ apiKey: 'key', domain: 'domain' });
 ```
 
 You may use this library in your Typescript project via:
 
 ```javascript
-import FreshSales from 'freshsales';
-const freshsales = new FreshSales({ apiKey: 'key', domain: 'domain' });
+import Freshsales from 'freshsales';
+const freshsales = new Freshsales({ apiKey: 'key', domain: 'domain' });
 ```
 
 ## License
