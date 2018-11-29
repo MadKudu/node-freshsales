@@ -1,4 +1,4 @@
-# node-hubspot
+# node-freshsales
 [![CircleCI](https://circleci.com/gh/MadKudu/node-freshsales.svg?style=svg)](https://circleci.com/gh/MadKudu/node-freshsales)
 [![Code Climate](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales/badges/gpa.svg)](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales)
 [![Test Coverage](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales/badges/coverage.svg)](https://codeclimate.com/github/https://codeclimate.com/github/MadKudu/node-freshsales/coverage)
