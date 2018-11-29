@@ -1,0 +1,69 @@
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+# Images at https://circleci.com/docs/2.0/circleci-images/
+
+references:
+  defaults: &defaults
+    working_directory: ~/repo
+    docker:
+      - image: madkudu/node:8.11
+    environment:
+      CC_TEST_REPORTER_ID: 11c2e3b233394c47b79fb7792b43aaa24e0a3cd3cd9a22f700a1ff54dfff9d97
+
+version: 2
+jobs:
+  build_job:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: npm run build
+
+      # This is from Code Climate (see https://docs.codeclimate.com/docs/circle-ci-test-coverage-example#section-circleci-20)
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+      - run: npm test
+
+      - run:
+          name: Upload coverage
+          command: ./cc-test-reporter after-build --coverage-input-type lcov
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+  publish_job:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - deploy:
+          command: npm publish
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build_job:
+          context: dev
+      - publish_job:
+          context: prod
+          requires:
+            - build_job
+          filters:
+            branches:
+              only: master
