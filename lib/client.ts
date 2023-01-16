@@ -1,13 +1,9 @@
 import * as axios from 'axios';
 import { EventEmitter } from 'events';
 import * as _ from 'lodash';
-// import Leads from './leads';
+import Debug from 'debug';
 
-const debug = require('debug')('freshsales:client');
-
-// define how long to wait API response before throwing a timeout error
-const API_TIMEOUT = 15000;
-const MAX_USE_PERCENT_DEFAULT = 90;
+const debug = Debug('freshsales:client');
 
 export interface FreshSalesOptions {
   domain: string;
@@ -21,17 +17,20 @@ class Client extends EventEmitter {
   authHeader: { Authorization: string };
   apiCalls: number;
   axios: axios.AxiosInstance;
-  constructor (options: FreshSalesOptions) {
+  constructor(options: FreshSalesOptions) {
     super();
     // this.qs = {};
     this.setBaseUrl(options);
     this.setApiKey(options);
     this.apiCalls = 0;
-    this.on('apiCall', (params: any) => {
+    this.on('apiCall', (params) => {
       debug('apiCall', _.pick(params, ['method', 'url']));
       this.apiCalls += 1;
     });
-    this.axios = axios.default.create({ baseURL: this.baseUrl, headers: this.authHeader });
+    this.axios = axios.default.create({
+      baseURL: this.baseUrl,
+      headers: this.authHeader,
+    });
     // this.contacts = new Contact(this);
   }
 
@@ -51,7 +50,7 @@ class Client extends EventEmitter {
     this.authHeader = { Authorization: `Token token=${this.apiKey}` };
   }
 
-  async request (config: axios.AxiosRequestConfig) {
+  async request(config: axios.AxiosRequestConfig) {
     const results = await this.axios(config);
     return results;
     // try {
@@ -64,7 +63,6 @@ class Client extends EventEmitter {
     // }
     // to add: count API calls and handle response
   }
-
 }
 
 export default Client;
